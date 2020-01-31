@@ -12,7 +12,11 @@
 
       <div class="dateContainer">
         <p class="dateDescription">日付を選択して下さい</p>
-        <input type="date" class="datePicker" />
+        <input
+          type="date"
+          class="datePicker"
+          @change="$emit('update', $event.target.value)"
+        />
       </div>
     </div>
   </header>

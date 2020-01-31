@@ -1,6 +1,7 @@
 <template>
   <div>
-    <AppHeader />
+    <AppHeader @update="onDateUpdate" />
+    {{ targetDate }}
     <AppFooter />
   </div>
 </template>
@@ -13,7 +14,13 @@ import AppFooter from "@/components/AppFooter.vue";
 @Component({
   components: { AppHeader, AppFooter }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  targetDate: string = "";
+
+  onDateUpdate(dateString: string): void {
+    this.targetDate = dateString;
+  }
+}
 </script>
 
 <style lang="scss">
