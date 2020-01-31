@@ -1,0 +1,8 @@
+$theme-color: #0f248a;
+$sub-color: #F3EB34;
+$contents-width: 1170px;
+
+@mixin centeringContents() {
+  width: $contents-width;
+  margin: 0 auto;
+}
