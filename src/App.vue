@@ -1,13 +1,14 @@
 <template>
   <div>
     <AppHeader @update="onDateUpdate" />
-    {{ targetDate }}
+    {{ fortuneResult }}
     <AppFooter />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import axios from "axios";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 
@@ -16,9 +17,18 @@ import AppFooter from "@/components/AppFooter.vue";
 })
 export default class App extends Vue {
   targetDate: string = "";
+  fortuneResult: object = {};
 
   onDateUpdate(dateString: string): void {
     this.targetDate = dateString;
+    // TODO: 日付をparse
+    this.getFortune(2020, 1, 31);
+  }
+
+  async getFortune(year: number, month: number, day: number) {
+    const url = `/api/v1/fortune?year=${year}&month=${month}&day=${day}`;
+    const result = await axios.get(url);
+    this.fortuneResult = result;
   }
 }
 </script>
