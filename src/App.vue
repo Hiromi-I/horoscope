@@ -2,8 +2,12 @@
   <div>
     <AppHeader @update="onDateUpdate" />
 
-    <DefaultContents v-if="fortuneResult === null" />
-    <ResultContents v-else />
+    <main>
+      <div class="centeringContainer">
+        <DefaultContents v-if="fortuneResult === null" />
+        <ResultContents v-else />
+      </div>
+    </main>
 
     <AppFooter />
   </div>
@@ -58,5 +62,9 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: #333;
+}
+
+.centeringContainer {
+  @include centeringContents();
 }
 </style>
