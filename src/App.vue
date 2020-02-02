@@ -11,24 +11,32 @@ import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
+import { Fortune, Horoscope } from "@/horoscope";
 
 @Component({
   components: { AppHeader, AppFooter }
 })
 export default class App extends Vue {
-  targetDate: string = "";
-  fortuneResult: object = {};
+  fortuneResult: Horoscope | null = null;
 
   onDateUpdate(dateString: string): void {
-    this.targetDate = dateString;
-    // TODO: 日付をparse
-    this.getFortune(2020, 1, 31);
+    if (dateString === "") {
+      this.fortuneResult = null;
+    } else {
+      const { year, month, day } = this.parseDate(dateString);
+      this.getFortune(year, month, day);
+    }
   }
 
-  async getFortune(year: number, month: number, day: number) {
+  async getFortune(year: string, month: string, day: string): Promise<void> {
     const url = `/api/v1/fortune?year=${year}&month=${month}&day=${day}`;
-    const result = await axios.get(url);
-    this.fortuneResult = result;
+    const result = await axios.get<Fortune>(url);
+    this.fortuneResult = result.data["horoscope"];
+  }
+
+  parseDate(dateString: string): { year: string; month: string; day: string } {
+    const array = dateString.split("-");
+    return { year: array[0], month: array[1], day: array[2] };
   }
 }
 </script>
