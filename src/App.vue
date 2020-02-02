@@ -1,7 +1,10 @@
 <template>
   <div>
     <AppHeader @update="onDateUpdate" />
-    {{ fortuneResult }}
+
+    <DefaultContents v-if="fortuneResult === null" />
+    <ResultContents v-else />
+
     <AppFooter />
   </div>
 </template>
@@ -11,10 +14,12 @@ import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
+import DefaultContents from "@/components/DefaultContents.vue";
+import ResultContents from "@/components/ResultContents.vue";
 import { Fortune, Horoscope } from "@/horoscope";
 
 @Component({
-  components: { AppHeader, AppFooter }
+  components: { AppHeader, AppFooter, DefaultContents, ResultContents }
 })
 export default class App extends Vue {
   fortuneResult: Horoscope | null = null;
