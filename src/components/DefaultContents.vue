@@ -11,23 +11,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { signMap } from "@/horoscope";
 
 @Component
 export default class DefaultContents extends Vue {
-  signs: String[] = [
-    "aries",
-    "taurus",
-    "gemini",
-    "cancer",
-    "leo",
-    "virgo",
-    "libra",
-    "scorpio",
-    "sagittarius",
-    "capricorn",
-    "aquarius",
-    "pisces"
-  ];
+  signs: String[] = Object.values(signMap);
 
   getImagePath(sign: string): string {
     return require(`@/assets/images/${sign}.jpg`);
