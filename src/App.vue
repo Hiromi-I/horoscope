@@ -4,8 +4,12 @@
 
     <main>
       <div class="centeringContainer">
-        <DefaultContents v-if="fortuneResult === null" />
-        <ResultContents v-else />
+        <ResultContents
+          v-if="signResults && targetDate"
+          :sign-results="signResults"
+          :date="targetDate"
+        />
+        <DefaultContents v-else />
       </div>
     </main>
 
@@ -27,12 +31,15 @@ import { Fortune, DailyResult, SignResult } from "@/horoscope";
 })
 export default class App extends Vue {
   signResults: SignResult[] | null = null;
+  targetDate: string | null = null;
 
   onDateUpdate(dateString: string): void {
     if (dateString === "") {
       this.signResults = null;
+      this.targetDate = null;
     } else {
       const { year, month, day } = this.parseDate(dateString);
+      this.targetDate = `${year}年${month}月${day}日`;
       this.getFortune(year, month, day);
     }
   }
@@ -41,6 +48,10 @@ export default class App extends Vue {
     const url = `/api/v1/fortune?year=${year}&month=${month}&day=${day}`;
     const response = await axios.get<Fortune>(url);
     const dailyResult = response.data["horoscope"];
+
+    // keyが動的に変わるので、この様に取得
+    const targetDays = Object.keys(dailyResult);
+    this.signResults = dailyResult[targetDays[0]];
   }
 
   parseDate(dateString: string): { year: string; month: string; day: string } {
