@@ -20,17 +20,17 @@ import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import DefaultContents from "@/components/DefaultContents.vue";
 import ResultContents from "@/components/ResultContents.vue";
-import { Fortune, Horoscope } from "@/horoscope";
+import { Fortune, DailyResult, SignResult } from "@/horoscope";
 
 @Component({
   components: { AppHeader, AppFooter, DefaultContents, ResultContents }
 })
 export default class App extends Vue {
-  fortuneResult: Horoscope | null = null;
+  signResults: SignResult[] | null = null;
 
   onDateUpdate(dateString: string): void {
     if (dateString === "") {
-      this.fortuneResult = null;
+      this.signResults = null;
     } else {
       const { year, month, day } = this.parseDate(dateString);
       this.getFortune(year, month, day);
@@ -39,8 +39,8 @@ export default class App extends Vue {
 
   async getFortune(year: string, month: string, day: string): Promise<void> {
     const url = `/api/v1/fortune?year=${year}&month=${month}&day=${day}`;
-    const result = await axios.get<Fortune>(url);
-    this.fortuneResult = result.data["horoscope"];
+    const response = await axios.get<Fortune>(url);
+    const dailyResult = response.data["horoscope"];
   }
 
   parseDate(dateString: string): { year: string; month: string; day: string } {

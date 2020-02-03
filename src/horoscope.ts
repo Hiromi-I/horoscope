@@ -1,12 +1,12 @@
 interface Fortune {
-  horoscope: Horoscope;
-}
-
-interface Horoscope {
-  [key: string]: DailyResult[];
+  horoscope: DailyResult;
 }
 
 interface DailyResult {
+  [key: string]: SignResult[];
+}
+
+interface SignResult {
   content: string;
   item: string;
   money: number;
@@ -20,4 +20,4 @@ interface DailyResult {
   hoge: boolean;
 }
 
-export { Fortune, Horoscope, DailyResult };
+export { Fortune, DailyResult, SignResult };
