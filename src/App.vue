@@ -41,7 +41,7 @@ export default class App extends Vue {
   }
 
   async getFortune(year: string, month: string, day: string): Promise<void> {
-    const url = `/api/v1/fortune?year=${year}&month=${month}&day=${day}`;
+    const url = `/api/v1/fortune/?year=${year}&month=${month}&day=${day}`;
     const response = await axios.get<Fortune>(url);
     this.fortuneResult = response.data;
   }
