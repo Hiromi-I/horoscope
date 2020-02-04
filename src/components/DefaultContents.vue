@@ -3,7 +3,7 @@
     <p class="info">右上の日付を選択して下さい</p>
     <ul class="signImageContainer">
       <li v-for="sign in signs" :key="sign" class="signImageListItem">
-        <img :src="getImagePath(sign)" :alt="sign" class="signImage" />
+        <img :src="`/${sign}.jpg`" :alt="sign" class="signImage" />
       </li>
     </ul>
   </section>
@@ -16,10 +16,6 @@ import { signMap } from "@/horoscope";
 @Component
 export default class DefaultContents extends Vue {
   signs: String[] = Object.values(signMap);
-
-  getImagePath(sign: string): string {
-    return require(`@/assets/images/${sign}.jpg`);
-  }
 }
 </script>
 
