@@ -15,6 +15,12 @@
     </main>
 
     <AppFooter />
+
+    <ModalDialog
+      v-show="dialogMessage"
+      :message="dialogMessage"
+      @close="clearMessage"
+    />
   </div>
 </template>
 
@@ -25,13 +31,21 @@ import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import DefaultContents from "@/components/DefaultContents.vue";
 import ResultContents from "@/components/ResultContents.vue";
+import ModalDialog from "@/components/ModalDialog.vue";
 import { Fortune, DailyResult, SignResult } from "@/horoscope";
 
 @Component({
-  components: { AppHeader, AppFooter, DefaultContents, ResultContents }
+  components: {
+    AppHeader,
+    AppFooter,
+    DefaultContents,
+    ResultContents,
+    ModalDialog
+  }
 })
 export default class App extends Vue {
   fortuneResult: Fortune | null = null;
+  dialogMessage: string = "";
 
   onDateUpdate(dateString: string): void {
     this.fortuneResult = null;
@@ -44,13 +58,22 @@ export default class App extends Vue {
 
   async getFortune(year: string, month: string, day: string): Promise<void> {
     const url = `/api/v1/fortune/?year=${year}&month=${month}&day=${day}`;
-    const response = await axios.get<Fortune>(url);
-    this.fortuneResult = response.data;
+    try {
+      const response = await axios.get<Fortune>(url);
+      this.fortuneResult = response.data;
+    } catch (error) {
+      this.dialogMessage =
+        "占いデータの取得に失敗しました。\n時間を置いて、再度ご確認ください。";
+    }
   }
 
   parseDate(dateString: string): { year: string; month: string; day: string } {
     const array = dateString.split("-");
     return { year: array[0], month: array[1], day: array[2] };
+  }
+
+  clearMessage(): void {
+    this.dialogMessage = "";
   }
 }
 </script>
