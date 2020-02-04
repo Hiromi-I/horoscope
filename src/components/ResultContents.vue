@@ -1,8 +1,12 @@
 <template>
   <section>
-    <h1 class="fortuneTitle">{{ date }}の運勢</h1>
+    <h1 class="fortuneTitle">{{ targetDate }}の運勢</h1>
     <ul class="signList">
-      <li v-for="result in signResults" :key="result.sign" class="signItem">
+      <li
+        v-for="result in signResultList"
+        :key="`${targetDate}-${result.sign}`"
+        class="signItem"
+      >
         <SignItem :sign-result="result" />
       </li>
     </ul>
@@ -12,17 +16,23 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import SignItem from "@/components/SignItem.vue";
-import { SignResult } from "@/horoscope";
+import { Fortune, SignResult } from "@/horoscope";
 
 @Component({
   components: { SignItem }
 })
 export default class ResultContents extends Vue {
   @Prop({ required: true })
-  signResults!: SignResult[];
+  fortuneResult!: Fortune;
 
-  @Prop({ required: true })
-  date!: string;
+  get targetDate(): string {
+    const keys: string[] = Object.keys(this.fortuneResult.horoscope);
+    return keys[0];
+  }
+
+  get signResultList(): SignResult[] {
+    return this.fortuneResult.horoscope[this.targetDate];
+  }
 }
 </script>
 
