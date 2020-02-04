@@ -1,6 +1,10 @@
 <template>
   <div>
-    <img class="signImage" :src="getImagePath(signResult.sign)" />
+    <img
+      class="signImage"
+      :src="getImagePath(signResult.sign)"
+      :alt="signResult.sign"
+    />
 
     <h2 class="signName">{{ signResult.sign }}</h2>
 
@@ -42,7 +46,7 @@ export default class SignItem extends Vue {
 
   getImagePath(signName: string): string {
     const sign = signMap[signName];
-    return require(`@/assets/images/${sign}.jpg`);
+    return `/${sign}.jpg`;
   }
 }
 </script>

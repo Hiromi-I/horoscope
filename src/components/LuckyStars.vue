@@ -1,7 +1,7 @@
 <template>
   <span>
-    <span v-for="count in score" :key="count">&starf;</span>
-    <span v-for="count in 5 - score" :key="count">&star;</span>
+    <span v-for="count in score" :key="`lucky-${count}`">&starf;</span>
+    <span v-for="count in 5 - score" :key="`unlucky-${count}`">&star;</span>
   </span>
 </template>
 

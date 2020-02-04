@@ -4,12 +4,13 @@
 
     <main>
       <div class="centeringContainer">
-        <ResultContents
-          v-if="signResults && targetDate"
-          :sign-results="signResults"
-          :date="targetDate"
-        />
-        <DefaultContents v-else />
+        <transition mode="out-in" appear>
+          <ResultContents
+            v-if="fortuneResult"
+            :fortune-result="fortuneResult"
+          />
+          <DefaultContents v-else />
+        </transition>
       </div>
     </main>
 
@@ -30,28 +31,21 @@ import { Fortune, DailyResult, SignResult } from "@/horoscope";
   components: { AppHeader, AppFooter, DefaultContents, ResultContents }
 })
 export default class App extends Vue {
-  signResults: SignResult[] | null = null;
-  targetDate: string | null = null;
+  fortuneResult: Fortune | null = null;
 
   onDateUpdate(dateString: string): void {
-    if (dateString === "") {
-      this.signResults = null;
-      this.targetDate = null;
-    } else {
+    this.fortuneResult = null;
+
+    if (dateString) {
       const { year, month, day } = this.parseDate(dateString);
-      this.targetDate = `${year}年${month}月${day}日`;
       this.getFortune(year, month, day);
     }
   }
 
   async getFortune(year: string, month: string, day: string): Promise<void> {
-    const url = `/api/v1/fortune?year=${year}&month=${month}&day=${day}`;
+    const url = `/api/v1/fortune/?year=${year}&month=${month}&day=${day}`;
     const response = await axios.get<Fortune>(url);
-    const dailyResult = response.data["horoscope"];
-
-    // keyが動的に変わるので、この様に取得
-    const targetDays = Object.keys(dailyResult);
-    this.signResults = dailyResult[targetDays[0]];
+    this.fortuneResult = response.data;
   }
 
   parseDate(dateString: string): { year: string; month: string; day: string } {
@@ -77,5 +71,18 @@ body {
 
 .centeringContainer {
   @include centeringContents();
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 1s;
+}
+.v-enter-to,
+.v-leave {
+  opacity: 1;
 }
 </style>
