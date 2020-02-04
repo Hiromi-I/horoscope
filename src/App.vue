@@ -4,11 +4,13 @@
 
     <main>
       <div class="centeringContainer">
-        <ResultContents
+        <transition mode="out-in" appear>
+          <ResultContents
             v-if="fortuneResult"
             :fortune-result="fortuneResult"
-        />
-        <DefaultContents v-else />
+          />
+          <DefaultContents v-else />
+        </transition>
       </div>
     </main>
 
@@ -69,5 +71,18 @@ body {
 
 .centeringContainer {
   @include centeringContents();
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 1s;
+}
+.v-enter-to,
+.v-leave {
+  opacity: 1;
 }
 </style>
