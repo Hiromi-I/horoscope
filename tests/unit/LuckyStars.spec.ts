@@ -12,4 +12,24 @@ describe("LuckyStars", () => {
     expect(wrapper.text().match(/[★☆]/g)).toHaveLength(5);
   });
 
+  it("scoreが5の場合", () => {
+    const wrapper = shallowMount(LuckyStars, {
+      propsData: { score: 5 }
+    });
+
+    expect(wrapper.text().match(/★/g)).toHaveLength(5);
+    expect(wrapper.text().match(/☆/g)).toBeNull;
+    expect(wrapper.text().match(/[★☆]/g)).toHaveLength(5);
+  });
+
+  it("scoreが0の場合", () => {
+    const wrapper = shallowMount(LuckyStars, {
+      propsData: { score: 0 }
+    });
+
+    expect(wrapper.text().match(/★/g)).toBeNull;
+    expect(wrapper.text().match(/☆/g)).toHaveLength(5);
+    expect(wrapper.text().match(/[★☆]/g)).toHaveLength(5);
+  });
+
 });
