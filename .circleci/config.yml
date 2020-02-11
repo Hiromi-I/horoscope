@@ -1,0 +1,27 @@
+version: 2.1
+executors:
+  js-env:
+    docker:
+      - image: circleci/node:11.4
+
+jobs:
+  js-test:
+    executor: js-env
+    working_directory: ~/app
+    steps:
+      - checkout
+      - run:
+          name: Install package
+          command: npm ci
+      - run: 
+          name: Execute test
+          command: npm run test:unit
+
+workflows:
+  version: 2.1
+  js:
+    jobs:
+      - js-test:
+          filters:
+            branches:
+              ignore: master
