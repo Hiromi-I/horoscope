@@ -52,7 +52,7 @@ export default class AppHeader extends Vue {}
 }
 .dateContainer {
   padding-bottom: 16px;
-  width: 150px;
+  width: 180px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
