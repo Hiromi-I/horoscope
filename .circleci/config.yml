@@ -16,6 +16,24 @@ jobs:
       - run: 
           name: Execute test
           command: npm run test:unit
+  deploy:
+    executor: js-env
+    working_directory: ~/app
+    steps:
+      - checkout
+      - run:
+          name: Install package
+          command: npm ci
+      - run:
+          name: Build
+          command: npm run build
+      - add_ssh_keys:
+          fingerprints: 
+            - "${FINGERPRINT}"
+      - run:
+          name: Deploy
+          command: scp -oStrictHostKeyChecking=no -r dist/* "${USER_NAME}@${HOST_NAME}:${APP_DIR}"
+
 
 workflows:
   version: 2.1
@@ -24,4 +42,10 @@ workflows:
       - js-test:
           filters:
             branches:
-              ignore: master
+              ignore:
+                - master
+                - release
+      - deploy:
+          filters:
+            branches:
+              only: release
