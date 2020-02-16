@@ -46,7 +46,7 @@ export default class SignItem extends Vue {
 
   getImagePath(signName: string): string {
     const sign = signMap[signName];
-    return `/${sign}.jpg`;
+    return require(`@/assets/images/${sign}.jpg`);
   }
 }
 </script>
