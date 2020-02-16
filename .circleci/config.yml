@@ -42,7 +42,9 @@ workflows:
       - js-test:
           filters:
             branches:
-              ignore: master
+              ignore:
+                - master
+                - release
       - deploy:
           filters:
             branches:
