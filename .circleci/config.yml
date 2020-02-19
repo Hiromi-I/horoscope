@@ -42,10 +42,8 @@ workflows:
       - js-test:
           filters:
             branches:
-              ignore:
-                - master
-                - release
+              ignore: master
       - deploy:
           filters:
             branches:
-              only: release
+              only: master
