@@ -62,8 +62,13 @@ export default class App extends Vue {
       const response = await axios.get<Fortune>(url);
       this.fortuneResult = response.data;
     } catch (error) {
-      this.dialogMessage =
-        "占いデータの取得に失敗しました。\n時間を置いて、再度ご確認ください。";
+      if (error.response.data === "Date Is Too Far") {
+        this.dialogMessage =
+          "指定された日時の占いデータは見つかりませんでした。\n近日の日時を指定して下さい。";
+      } else {
+        this.dialogMessage =
+          "占いデータの取得に失敗しました。\n時間を置いて、再度ご確認ください。";
+      }
     }
   }
 
