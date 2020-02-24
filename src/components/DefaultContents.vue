@@ -3,7 +3,7 @@
     <p class="info">右上の日付を選択して下さい</p>
     <ul class="signImageContainer">
       <li v-for="sign in signs" :key="sign" class="signImageListItem">
-        <img :src="getImagePath(sign)" :alt="sign" class="signImage" />
+        <img :src="getImagePath(sign)" :alt="sign" width="175" height="175" />
       </li>
     </ul>
   </section>
@@ -46,11 +46,7 @@ export default class DefaultContents extends Vue {
   flex-wrap: wrap;
 }
 .signImageListItem {
-  width: 16%;
+  width: 175px;
   overflow: hidden;
-}
-.signImage {
-  width: 100%;
-  height: auto;
 }
 </style>
