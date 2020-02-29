@@ -4,30 +4,17 @@
 
 ![result](https://user-images.githubusercontent.com/10791675/74939119-afa2c700-5432-11ea-925d-dc2472510f0c.png)
 
-## Project setup
+## ローカルでの実行方法
 ```
-npm install
-```
+git clone git@github.com:Hiromi-I/horoscope.git
 
-### Compiles and hot-reloads for development
-```
+cd horoscope
+
+npm ci
+
+npm run mock-api
+
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+`npm run mock-api` と `npm run serve` は別タブで起動
