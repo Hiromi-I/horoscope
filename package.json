@@ -10,7 +10,7 @@
     "mock-api": "json-server --watch mock_db.json --routes mock_route.json"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.4.4",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",
