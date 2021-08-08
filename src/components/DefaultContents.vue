@@ -10,17 +10,23 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { defineComponent } from "vue";
 import { signMap } from "@/horoscope";
 
-@Component
-export default class DefaultContents extends Vue {
-  signs: String[] = Object.values(signMap);
+export default defineComponent({
+  name: "DefaultContents",
+  setup() {
+    const signs: Array<string> = Object.values(signMap);
+    const getImagePath = (sign: string) => {
+      return require(`@/assets/images/${sign}.jpg`);
+    };
 
-  getImagePath(sign: string): string {
-    return require(`@/assets/images/${sign}.jpg`);
-  }
-}
+    return {
+      signs,
+      getImagePath,
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>
