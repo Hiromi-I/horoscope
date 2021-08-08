@@ -6,11 +6,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-
-@Component
-export default class LuckyStars extends Vue {
-  @Prop({ required: true })
-  score!: number;
-}
+export default {
+  name: "LuckyStars",
+  props: {
+    score: {
+      type: Number,
+      required: true,
+    },
+  },
+};
 </script>
