@@ -26,6 +26,9 @@
 <script lang="ts">
 export default {
   name: "AppHeader",
+  emits: [
+    "update",
+  ]
 };
 </script>
 
