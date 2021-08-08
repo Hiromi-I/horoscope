@@ -16,6 +16,9 @@ export default {
       required: true,
     },
   },
+  emits: [
+    "close",
+  ],
 };
 </script>
 

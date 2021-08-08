@@ -2,7 +2,7 @@
   <div>
     <img
       class="signImage"
-      :src="getImagePath(signResult.sign)"
+      :src="getSignImage(signResult.sign)"
       :alt="signResult.sign"
     />
 
@@ -35,7 +35,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import LuckyStars from "@/components/LuckyStars.vue";
-import { SignResult, signMap } from "@/horoscope";
+import { SignResult } from "@/horoscope";
+import { useSigns } from "@/hooks/useSigns";
 
 export default defineComponent({
   name: "SignItem",
@@ -49,13 +50,10 @@ export default defineComponent({
     },
   },
   setup() {
-    const getImagePath = (signName: string) => {
-      const sign = signMap[signName];
-      return require(`@/assets/images/${sign}.jpg`);
-    };
+    const { getSignImage } = useSigns();
 
     return {
-      getImagePath
+      getSignImage
     };
   },
 });
