@@ -33,22 +33,32 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { defineComponent, PropType } from "vue";
 import LuckyStars from "@/components/LuckyStars.vue";
 import { SignResult, signMap } from "@/horoscope";
 
-@Component({
-  components: { LuckyStars }
-})
-export default class SignItem extends Vue {
-  @Prop({ required: true })
-  signResult!: SignResult;
+export default defineComponent({
+  name: "SignItem",
+  components: {
+    LuckyStars,
+  },
+  props: {
+    signResult: {
+      type: Object as PropType<SignResult>,
+      required: true,
+    },
+  },
+  setup() {
+    const getImagePath = (signName: string) => {
+      const sign = signMap[signName];
+      return require(`@/assets/images/${sign}.jpg`);
+    };
 
-  getImagePath(signName: string): string {
-    const sign = signMap[signName];
-    return require(`@/assets/images/${sign}.jpg`);
-  }
-}
+    return {
+      getImagePath
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>
