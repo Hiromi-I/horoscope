@@ -8,13 +8,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-
-@Component
-export default class ModalDialog extends Vue {
-  @Prop({ required: true })
-  message!: string;
-}
+export default {
+  name: "ModalDialog",
+  props: {
+    message: {
+      type: String,
+      required: true,
+    },
+  },
+  emits: [
+    "close",
+  ],
+};
 </script>
 
 <style lang="scss" scoped>

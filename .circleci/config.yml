@@ -2,7 +2,7 @@ version: 2.1
 executors:
   js-env:
     docker:
-      - image: circleci/node:11.4
+      - image: circleci/node:16.6.0
 
 jobs:
   js-test:

@@ -14,26 +14,32 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { defineComponent, PropType, toRefs } from "vue";
 import SignItem from "@/components/SignItem.vue";
-import { Fortune, SignResult } from "@/horoscope";
+import { FortuneResponseType, SignDayResultType } from "@/types/horoscope";
 
-@Component({
-  components: { SignItem }
-})
-export default class ResultContents extends Vue {
-  @Prop({ required: true })
-  fortuneResult!: Fortune;
+export default defineComponent({
+  name: "ResultContents",
+  components: {
+    SignItem,
+  },
+  props: {
+    fortuneResult: {
+      type: Object as PropType<FortuneResponseType>,
+      required: true,
+    },
+  },
+  setup(props) {
+    const { fortuneResult } = toRefs(props);
+    const targetDate: string = Object.keys(fortuneResult.value.horoscope)[0];
+    const signResultList: Array<SignDayResultType> = fortuneResult.value.horoscope[targetDate];
 
-  get targetDate(): string {
-    const keys: string[] = Object.keys(this.fortuneResult.horoscope);
-    return keys[0];
-  }
-
-  get signResultList(): SignResult[] {
-    return this.fortuneResult.horoscope[this.targetDate];
-  }
-}
+    return {
+      targetDate,
+      signResultList,
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>
