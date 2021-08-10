@@ -16,7 +16,7 @@
 <script lang="ts">
 import { defineComponent, PropType, toRefs } from "vue";
 import SignItem from "@/components/SignItem.vue";
-import { Fortune, SignResult } from "@/horoscope";
+import { FortuneResponseType, SignDayResultType } from "@/types/horoscope";
 
 export default defineComponent({
   name: "ResultContents",
@@ -25,14 +25,14 @@ export default defineComponent({
   },
   props: {
     fortuneResult: {
-      type: Object as PropType<Fortune>,
+      type: Object as PropType<FortuneResponseType>,
       required: true,
     },
   },
   setup(props) {
     const { fortuneResult } = toRefs(props);
     const targetDate: string = Object.keys(fortuneResult.value.horoscope)[0];
-    const signResultList: Array<SignResult> = fortuneResult.value.horoscope[targetDate];
+    const signResultList: Array<SignDayResultType> = fortuneResult.value.horoscope[targetDate];
 
     return {
       targetDate,

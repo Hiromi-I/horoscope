@@ -35,7 +35,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import LuckyStars from "@/components/LuckyStars.vue";
-import { SignResult } from "@/horoscope";
+import { SignDayResultType } from "@/types/horoscope";
 import { useSigns } from "@/hooks/useSigns";
 
 export default defineComponent({
@@ -45,7 +45,7 @@ export default defineComponent({
   },
   props: {
     signResult: {
-      type: Object as PropType<SignResult>,
+      type: Object as PropType<SignDayResultType>,
       required: true,
     },
   },
