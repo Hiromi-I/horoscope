@@ -4,7 +4,7 @@ import LuckyStars from "@/components/LuckyStars.vue";
 describe("LuckyStars", () => {
   it("scoreが3の場合", () => {
     const wrapper = shallowMount(LuckyStars, {
-      propsData: { score: 3 }
+      props: { score: 3 }
     });
 
     expect(wrapper.text().match(/★/g)).toHaveLength(3);
@@ -14,7 +14,7 @@ describe("LuckyStars", () => {
 
   it("scoreが5の場合", () => {
     const wrapper = shallowMount(LuckyStars, {
-      propsData: { score: 5 }
+      props: { score: 5 }
     });
 
     expect(wrapper.text().match(/★/g)).toHaveLength(5);
@@ -24,7 +24,7 @@ describe("LuckyStars", () => {
 
   it("scoreが0の場合", () => {
     const wrapper = shallowMount(LuckyStars, {
-      propsData: { score: 0 }
+      props: { score: 0 }
     });
 
     expect(wrapper.text().match(/★/g)).toBeNull;
