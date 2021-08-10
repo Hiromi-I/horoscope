@@ -26,7 +26,7 @@ describe("App", () => {
   it("メッセージが有る場合はModalDialogを表示", () => {
     const wrapper = shallowMount(App);
 
-    wrapper.setData({ dialogMessage: "test" });
+    wrapper.setData({ errorMessage: "test" });
 
     expect(wrapper.findComponent(ModalDialog).isVisible()).toBeTruthy();
   });
@@ -34,7 +34,7 @@ describe("App", () => {
   it("メッセージが無い場合はModalDialogを非表示", () => {
     const wrapper = shallowMount(App);
 
-    wrapper.setData({ dialogMessage: "" });
+    wrapper.setData({ errorMessage: "" });
 
     expect(wrapper.findComponent(ModalDialog).isVisible()).toBeFalsy();
   });
