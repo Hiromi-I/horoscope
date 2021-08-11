@@ -3,7 +3,7 @@
     <AppHeader @update="onDateUpdate" />
 
     <main>
-      <div class="centeringContainer">
+      <CenteringContainer>
         <transition mode="out-in" appear>
           <ResultContents
             v-if="fortuneResult"
@@ -11,7 +11,7 @@
           />
           <DefaultContents v-else />
         </transition>
-      </div>
+      </CenteringContainer>
     </main>
 
     <AppFooter />
@@ -32,6 +32,7 @@ import AppFooter from "@/components/AppFooter.vue";
 import DefaultContents from "@/components/DefaultContents.vue";
 import ResultContents from "@/components/ResultContents.vue";
 import ModalDialog from "@/components/ModalDialog.vue";
+import CenteringContainer from "@/components/CenteringContainer.vue";
 import { useGetFortune } from "@/hooks/useGetFortune";
 
 export default defineComponent({
@@ -42,6 +43,7 @@ export default defineComponent({
     DefaultContents,
     ResultContents,
     ModalDialog,
+    CenteringContainer,
   },
   setup() {
     const { fortuneResult, errorMessage, isLoading, onDateUpdate } = useGetFortune();
@@ -75,10 +77,6 @@ body {
   --theme-color: #0f248a;
   --sub-color: #F3EB34;
   --contents-width: 1170px
-}
-
-.centeringContainer {
-  @include centeringContents();
 }
 
 .v-enter,

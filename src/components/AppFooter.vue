@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="footerContainer">
+    <CenteringContainer class="footerContainer">
       <p class="footerLink">
         powerd by&nbsp;<a
           href="http://jugemkey.jp/api/waf/api_free.php"
@@ -13,19 +13,22 @@
           原宿占い館 塔里木
         </a>
       </p>
-    </div>
+    </CenteringContainer>
   </footer>
 </template>
 
 <script lang="ts">
+import CenteringContainer from "@/components/CenteringContainer.vue";
+
 export default {
   name: "AppFooter",
+  components: {
+    CenteringContainer,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/common";
-
 .footer {
   background-color: var(--theme-color);
   color: white;
@@ -35,7 +38,6 @@ export default {
   bottom: 0;
 }
 .footerContainer {
-  @include centeringContents();
   display: flex;
 }
 .footerLink + .footerLink {
