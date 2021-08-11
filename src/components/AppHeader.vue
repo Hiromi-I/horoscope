@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="headerContainer">
+    <CenteringContainer class="headerContainer">
       <a class="logo">
         <img
           src="@/assets/images/logo.png"
@@ -19,31 +19,31 @@
           @change="$emit('update', $event.target.value)"
         />
       </div>
-    </div>
+    </CenteringContainer>
   </header>
 </template>
 
 <script lang="ts">
+import CenteringContainer from "@/components/CenteringContainer.vue";
+
 export default {
   name: "AppHeader",
-  emits: [
-    "update",
-  ]
+  components: {
+    CenteringContainer,
+  },
+  emits: ["update"],
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/common";
-
 .header {
-  background-color: $theme-color;
+  background-color: var(--theme-color);
   height: 86px;
   width: 100%;
   position: fixed;
   top: 0;
 }
 .headerContainer {
-  @include centeringContents();
   display: flex;
   justify-content: space-between;
 }

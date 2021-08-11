@@ -32,7 +32,8 @@ export default defineComponent({
   setup(props) {
     const { fortuneResult } = toRefs(props);
     const targetDate: string = Object.keys(fortuneResult.value.horoscope)[0];
-    const signResultList: Array<SignDayResultType> = fortuneResult.value.horoscope[targetDate];
+    const signResultList: Array<SignDayResultType> =
+      fortuneResult.value.horoscope[targetDate];
 
     return {
       targetDate,
@@ -43,10 +44,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/common";
-
 .fortuneTitle {
-  color: $theme-color;
+  color: var(--theme-color);
   font-size: 36px;
   text-align: center;
   margin: 30px 0;
@@ -62,7 +61,7 @@ export default defineComponent({
   width: 23%;
   margin-bottom: 20px;
   background-color: white;
-  border: solid 1px $theme-color;
+  border: solid 1px var(--theme-color);
   border-radius: 5px;
 }
 </style>

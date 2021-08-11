@@ -1,15 +1,19 @@
-import { ref } from "vue";
+import { Ref, ref } from "vue";
 import axios from "axios";
 
 import { FortuneResponseType } from "@/types/horoscope";
 
-export const useGetFortune = () => {
+export const useGetFortune = (): {
+  fortuneResult: Ref<FortuneResponseType | null>;
+  errorMessage: Ref<string>;
+  isLoading: Ref<boolean>;
+  onDateUpdate: (dateString: string) => void;
+} => {
   const fortuneResult = ref<FortuneResponseType | null>(null);
   const errorMessage = ref("");
   const isLoading = ref(false);
 
-  type onDateUpdateFunc = (dataString: string) => void;
-  const onDateUpdate: onDateUpdateFunc = (dateString: string) => {
+  const onDateUpdate = (dateString: string): void => {
     fortuneResult.value = null;
     if (dateString === "") return;
 
@@ -17,8 +21,11 @@ export const useGetFortune = () => {
     _getFortune(year, month, day);
   };
 
-  type getFortuneFunc = (year: string, month: string, day: string) => Promise<void>;
-  const _getFortune: getFortuneFunc = async (year: string, month: string, day: string) => {
+  const _getFortune = async (
+    year: string,
+    month: string,
+    day: string
+  ): Promise<void> => {
     const url = `/api/v1/fortune/?year=${year}&month=${month}&day=${day}`;
     isLoading.value = true;
 
@@ -26,9 +33,10 @@ export const useGetFortune = () => {
       const response = await axios.get<FortuneResponseType>(url);
       fortuneResult.value = response.data;
     } catch (error) {
-      errorMessage.value = error.response.data === "Date Is Too Far"
-        ? "指定された日時の占いデータは見つかりませんでした。\n近日の日時を指定して下さい。"
-        : "占いデータの取得に失敗しました。\n時間を置いて、再度ご確認ください。";
+      errorMessage.value =
+        error.response.data === "Date Is Too Far"
+          ? "指定された日時の占いデータは見つかりませんでした。\n近日の日時を指定して下さい。"
+          : "占いデータの取得に失敗しました。\n時間を置いて、再度ご確認ください。";
     } finally {
       isLoading.value = false;
     }

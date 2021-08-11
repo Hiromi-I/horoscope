@@ -28,16 +28,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/common";
-
 .defaultContents {
   background-color: white;
-  border: solid 2px $sub-color;
+  border: solid 2px var(--sub-color);
   padding: 40px;
   margin: 40px 0 0;
 }
 .info {
-  color: $theme-color;
+  color: var(--theme-color);
   font-size: 36px;
   text-align: center;
   margin-bottom: 30px;
