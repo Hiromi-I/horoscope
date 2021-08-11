@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <CenteringContainer  class="headerContainer">
+    <CenteringContainer class="headerContainer">
       <a class="logo">
         <img
           src="@/assets/images/logo.png"
@@ -31,9 +31,7 @@ export default {
   components: {
     CenteringContainer,
   },
-  emits: [
-    "update",
-  ]
+  emits: ["update"],
 };
 </script>
 

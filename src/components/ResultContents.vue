@@ -32,7 +32,8 @@ export default defineComponent({
   setup(props) {
     const { fortuneResult } = toRefs(props);
     const targetDate: string = Object.keys(fortuneResult.value.horoscope)[0];
-    const signResultList: Array<SignDayResultType> = fortuneResult.value.horoscope[targetDate];
+    const signResultList: Array<SignDayResultType> =
+      fortuneResult.value.horoscope[targetDate];
 
     return {
       targetDate,

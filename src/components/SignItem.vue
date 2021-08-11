@@ -53,7 +53,7 @@ export default defineComponent({
     const { getSignImage } = useSigns();
 
     return {
-      getSignImage
+      getSignImage,
     };
   },
 });

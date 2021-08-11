@@ -46,8 +46,9 @@ export default defineComponent({
     CenteringContainer,
   },
   setup() {
-    const { fortuneResult, errorMessage, isLoading, onDateUpdate } = useGetFortune();
-    const clearMessage = () => errorMessage.value = "";
+    const { fortuneResult, errorMessage, isLoading, onDateUpdate } =
+      useGetFortune();
+    const clearMessage = () => (errorMessage.value = "");
 
     return {
       fortuneResult,
@@ -253,8 +254,8 @@ body {
 }
 :root {
   --theme-color: #0f248a;
-  --sub-color: #F3EB34;
-  --contents-width: 1170px
+  --sub-color: #f3eb34;
+  --contents-width: 1170px;
 }
 
 .v-enter,

@@ -10,12 +10,15 @@ const SIGN_MAP: { [key: string]: string } = {
   射手座: "sagittarius",
   山羊座: "capricorn",
   水瓶座: "aquarius",
-  魚座: "pisces"
+  魚座: "pisces",
 };
 
-export const useSigns = () => {
+export const useSigns = (): {
+  signs: Array<string>;
+  getSignImage: (signName: string) => string;
+} => {
   const signs: Array<string> = Object.keys(SIGN_MAP);
-  const getSignImage = (signName: string) => {
+  const getSignImage = (signName: string): string => {
     const sign = SIGN_MAP[signName];
     return require(`@/assets/images/${sign}.jpg`);
   };
