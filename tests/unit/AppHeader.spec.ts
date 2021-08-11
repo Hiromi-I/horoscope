@@ -1,9 +1,9 @@
-import { shallowMount } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 import AppHeader from "@/components/AppHeader.vue";
 
 describe("AppHeader", () => {
   it("日付選択で値をEmmit", () => {
-    const wrapper = shallowMount(AppHeader);
+    const wrapper = mount(AppHeader);
     const datePicker = wrapper.find(".datePicker");
 
     datePicker.setValue("2020-02-10");
@@ -13,7 +13,7 @@ describe("AppHeader", () => {
   });
 
   it("日付フォーマットがpatternに合っていない場合は空文字をEmmit", () => {
-    const wrapper = shallowMount(AppHeader);
+    const wrapper = mount(AppHeader);
     const datePicker = wrapper.find(".datePicker");
 
     datePicker.setValue("2020-2-1");
