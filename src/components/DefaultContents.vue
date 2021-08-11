@@ -28,8 +28,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/common";
-
 .defaultContents {
   background-color: white;
   border: solid 2px var(--sub-color);

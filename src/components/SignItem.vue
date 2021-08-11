@@ -60,8 +60,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/common";
-
 .signImage {
   display: block;
   width: 95%;

@@ -43,8 +43,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/common";
-
 .fortuneTitle {
   color: var(--theme-color);
   font-size: 36px;
