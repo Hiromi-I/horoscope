@@ -70,7 +70,7 @@ export default defineComponent({
 }
 .signName {
   color: white;
-  background-color: $theme-color;
+  background-color: var(--theme-color);
   font-size: 18px;
   line-height: 36px;
   letter-spacing: 0.3em;
@@ -78,7 +78,7 @@ export default defineComponent({
   margin-bottom: 15px;
 }
 .splitter {
-  border-color: $theme-color;
+  border-color: var(--theme-color);
   margin: 10px;
 }
 .fortuneContent {
@@ -89,11 +89,11 @@ export default defineComponent({
   margin: 10px;
 }
 .topicTitle {
-  color: $theme-color;
+  color: var(--theme-color);
   font-weight: bold;
 }
 .topicBody {
-  color: $theme-color;
+  color: var(--theme-color);
   margin-bottom: 10px;
 }
 .stars {

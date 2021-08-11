@@ -27,7 +27,7 @@ export default {
 @import "../assets/styles/common";
 
 .footer {
-  background-color: $theme-color;
+  background-color: var(--theme-color);
   color: white;
   height: 50px;
   width: 100%;

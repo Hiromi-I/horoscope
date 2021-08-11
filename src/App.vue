@@ -71,6 +71,11 @@ body {
   line-height: 1.5;
   color: #333;
 }
+:root {
+  --theme-color: #0f248a;
+  --sub-color: #F3EB34;
+  --contents-width: 1170px
+}
 
 .centeringContainer {
   @include centeringContents();

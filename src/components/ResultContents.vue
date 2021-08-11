@@ -46,7 +46,7 @@ export default defineComponent({
 @import "../assets/styles/common";
 
 .fortuneTitle {
-  color: $theme-color;
+  color: var(--theme-color);
   font-size: 36px;
   text-align: center;
   margin: 30px 0;
@@ -62,7 +62,7 @@ export default defineComponent({
   width: 23%;
   margin-bottom: 20px;
   background-color: white;
-  border: solid 1px $theme-color;
+  border: solid 1px var(--theme-color);
   border-radius: 5px;
 }
 </style>

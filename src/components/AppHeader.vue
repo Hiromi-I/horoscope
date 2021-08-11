@@ -36,7 +36,7 @@ export default {
 @import "../assets/styles/common";
 
 .header {
-  background-color: $theme-color;
+  background-color: var(--theme-color);
   height: 86px;
   width: 100%;
   position: fixed;
