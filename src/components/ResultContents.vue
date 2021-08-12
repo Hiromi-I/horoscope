@@ -51,15 +51,13 @@ export default defineComponent({
   margin: 30px 0;
 }
 .signList {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
   list-style: none;
 }
 
 .signItem {
-  width: 23%;
-  margin-bottom: 20px;
   background-color: white;
   border: solid 1px var(--theme-color);
   border-radius: 5px;
