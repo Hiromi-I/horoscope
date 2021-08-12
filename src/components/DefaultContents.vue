@@ -1,8 +1,8 @@
 <template>
   <section class="defaultContents">
     <p class="info">右上の日付を選択して下さい</p>
-    <ul class="signImageContainer">
-      <li v-for="sign in signs" :key="sign" class="signImageListItem">
+    <ul class="imageContainer">
+      <li v-for="sign in signs" :key="sign">
         <img :src="getSignImage(sign)" :alt="sign" width="175" height="175" />
       </li>
     </ul>
@@ -41,14 +41,9 @@ export default defineComponent({
   margin-bottom: 30px;
 }
 
-.signImageContainer {
+.imageContainer {
   list-style: none;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.signImageListItem {
-  width: 175px;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
 }
 </style>
