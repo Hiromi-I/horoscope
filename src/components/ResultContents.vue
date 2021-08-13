@@ -1,11 +1,11 @@
 <template>
   <section>
     <h1 class="titleDate">{{ targetDate }}の運勢</h1>
-    <ul class="signList">
+    <ul class="signsList">
       <li
         v-for="result in signResultList"
         :key="`${targetDate}-${result.sign}`"
-        class="signItem"
+        class="signsList--Item"
       >
         <SignItem :sign-result="result" />
       </li>
@@ -50,14 +50,14 @@ export default defineComponent({
   text-align: center;
   margin: 30px 0;
 }
-.signList {
+.signsList {
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(4, 1fr);
   list-style: none;
 }
 
-.signItem {
+.signsList--Item {
   background-color: white;
   border: solid 1px var(--theme-color);
   border-radius: 5px;
