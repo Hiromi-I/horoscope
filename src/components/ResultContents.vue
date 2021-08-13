@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="fortuneTitle">{{ targetDate }}の運勢</h1>
+    <h1 class="titleDate">{{ targetDate }}の運勢</h1>
     <ul class="signList">
       <li
         v-for="result in signResultList"
@@ -44,7 +44,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.fortuneTitle {
+.titleDate {
   color: var(--theme-color);
   font-size: 36px;
   text-align: center;
