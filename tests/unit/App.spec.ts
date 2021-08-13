@@ -1,6 +1,6 @@
 import { mount, flushPromises } from "@vue/test-utils";
 import App from "@/App.vue";
-import DefaultContents from "@/components/DefaultContents.vue";
+import InitialGuide from "@/components/InitialGuide.vue";
 import ResultContents from "@/components/ResultContents.vue";
 import ModalDialog from "@/components/ModalDialog.vue";
 
@@ -11,7 +11,7 @@ describe("App", () => {
     wrapper.vm.fortuneResult = null;
     await flushPromises();
 
-    expect(wrapper.findComponent(DefaultContents).exists()).toBeTruthy();
+    expect(wrapper.findComponent(InitialGuide).exists()).toBeTruthy();
     expect(wrapper.findComponent(ResultContents).exists()).toBeFalsy();
   });
 
@@ -26,7 +26,7 @@ describe("App", () => {
     await flushPromises();
 
     expect(wrapper.findComponent(ResultContents).exists()).toBeTruthy();
-    expect(wrapper.findComponent(DefaultContents).exists()).toBeFalsy();
+    expect(wrapper.findComponent(InitialGuide).exists()).toBeFalsy();
   });
 
   it("メッセージが有る場合はModalDialogを表示", async () => {

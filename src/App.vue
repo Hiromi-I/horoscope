@@ -9,7 +9,7 @@
             v-if="fortuneResult"
             :fortune-result="fortuneResult"
           />
-          <DefaultContents v-else />
+          <InitialGuide v-else />
         </transition>
       </CenteringContainer>
     </main>
@@ -29,7 +29,7 @@ import { defineComponent } from "vue";
 
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
-import DefaultContents from "@/components/DefaultContents.vue";
+import InitialGuide from "@/components/InitialGuide.vue";
 import ResultContents from "@/components/ResultContents.vue";
 import ModalDialog from "@/components/ModalDialog.vue";
 import CenteringContainer from "@/components/CenteringContainer.vue";
@@ -40,7 +40,7 @@ export default defineComponent({
   components: {
     AppHeader,
     AppFooter,
-    DefaultContents,
+    InitialGuide,
     ResultContents,
     ModalDialog,
     CenteringContainer,
