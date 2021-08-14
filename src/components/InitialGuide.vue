@@ -1,11 +1,12 @@
 <template>
   <section class="defaultContents">
     <p class="info">右上の日付を選択して下さい</p>
-    <ul class="imageContainer">
-      <li v-for="sign in signs" :key="sign">
-        <img :src="getSignImage(sign)" :alt="sign" width="175" height="175" />
-      </li>
-    </ul>
+    <img
+      src="@/assets/images/signs.png"
+      width="1200"
+      height="400"
+      class="signsImage"
+    />
   </section>
 </template>
 
@@ -40,10 +41,8 @@ export default defineComponent({
   text-align: center;
   margin-bottom: 30px;
 }
-
-.imageContainer {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
+.signsImage {
+  max-width: 100%;
+  height: auto;
 }
 </style>
