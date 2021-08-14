@@ -3,6 +3,21 @@ executors:
   js-env:
     docker:
       - image: cimg/node:16.6.0
+commands:
+  restore_packages:
+    steps:
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+  save_packages:
+    steps:
+      - save_cache:
+          paths:
+            - node_modules
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+
 
 jobs:
   js-test:
@@ -10,18 +25,11 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - node-v1-{{ .Branch }}-
-            - node-v1-
+      - restore_packages
       - run:
           name: Install package
           command: npm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - save_packages
       - run: 
           name: Execute test
           command: npm run test:unit
@@ -30,11 +38,7 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - node-v1-{{ .Branch }}-
-            - node-v1-
+      - restore_packages
       - run:
           name: Install package
           command: npm ci
