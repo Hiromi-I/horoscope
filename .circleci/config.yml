@@ -64,13 +64,21 @@ jobs:
 
 workflows:
   version: 2
-  js:
+  test:
     jobs:
-      - js-test:
+      - install-deps:
           filters:
             branches:
               ignore: master
-      - deploy:
+      - test:
+          requires:
+            - install-deps
+  deploy:
+    jobs:
+      - install-deps:
           filters:
             branches:
               only: master
+      - build-and-deploy:
+          requires:
+            - install-deps
