@@ -20,7 +20,7 @@ commands:
 
 
 jobs:
-  js-test:
+  install-deps:
     executor: js-env
     working_directory: ~/app
     steps:
@@ -30,18 +30,27 @@ jobs:
           name: Install package
           command: npm install
       - save_packages
-      - run: 
-          name: Execute test
-          command: npm run test:unit
-  deploy:
+      - persist_to_workspace:
+          root: ~/app
+          paths:
+            - node_modules/*
+  test:
     executor: js-env
     working_directory: ~/app
     steps:
       - checkout
-      - restore_packages
-      - run:
-          name: Install package
-          command: npm ci
+      - attach_workspace:
+          at: ~/app
+      - run: 
+          name: Execute test
+          command: npm run test:unit
+  build-and-deploy:
+    executor: js-env
+    working_directory: ~/app
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/app
       - run:
           name: Build
           command: npm run build
