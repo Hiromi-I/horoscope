@@ -1,8 +1,10 @@
 version: 2.1
+
 executors:
   js-env:
     docker:
       - image: cimg/node:16.6.0
+
 commands:
   restore_packages:
     steps:
@@ -17,7 +19,6 @@ commands:
           paths:
             - node_modules
           key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-
 
 jobs:
   install-deps:
@@ -60,7 +61,6 @@ jobs:
       - run:
           name: Deploy
           command: scp -oStrictHostKeyChecking=no -r dist/* "${USER_NAME}@${HOST_NAME}:${APP_DIR}"
-
 
 workflows:
   version: 2
