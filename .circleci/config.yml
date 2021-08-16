@@ -1,43 +1,57 @@
 version: 2.1
+
 executors:
   js-env:
     docker:
       - image: cimg/node:16.6.0
 
-jobs:
-  js-test:
-    executor: js-env
-    working_directory: ~/app
+commands:
+  restore_packages:
     steps:
-      - checkout
       - restore_cache:
           keys:
             - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
             - node-v1-{{ .Branch }}-
             - node-v1-
-      - run:
-          name: Install package
-          command: npm install
+  save_packages:
+    steps:
       - save_cache:
           paths:
             - node_modules
           key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-      - run: 
-          name: Execute test
-          command: npm run test:unit
-  deploy:
+
+jobs:
+  install-deps:
     executor: js-env
     working_directory: ~/app
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - node-v1-{{ .Branch }}-
-            - node-v1-
+      - restore_packages
       - run:
           name: Install package
-          command: npm ci
+          command: npm install
+      - save_packages
+      - persist_to_workspace:
+          root: ~/app
+          paths:
+            - node_modules/*
+  test:
+    executor: js-env
+    working_directory: ~/app
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/app
+      - run: 
+          name: Execute test
+          command: npm run test:unit
+  build-and-deploy:
+    executor: js-env
+    working_directory: ~/app
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/app
       - run:
           name: Build
           command: npm run build
@@ -48,16 +62,23 @@ jobs:
           name: Deploy
           command: scp -oStrictHostKeyChecking=no -r dist/* "${USER_NAME}@${HOST_NAME}:${APP_DIR}"
 
-
 workflows:
-  version: 2.1
-  js:
+  version: 2
+  test:
     jobs:
-      - js-test:
+      - install-deps:
           filters:
             branches:
               ignore: master
-      - deploy:
+      - test:
+          requires:
+            - install-deps
+  deploy:
+    jobs:
+      - install-deps:
           filters:
             branches:
               only: master
+      - build-and-deploy:
+          requires:
+            - install-deps
