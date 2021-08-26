@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, toRefs } from "vue";
+import { defineComponent, PropType, toRefs, onMounted } from "vue";
 import SignItem from "@/components/SignItem.vue";
 import { FortuneResponseType, SignDayResultType } from "@/types/horoscope";
 
@@ -34,6 +34,7 @@ export default defineComponent({
     const targetDate: string = Object.keys(fortuneResult.value.horoscope)[0];
     const signResultList: Array<SignDayResultType> =
       fortuneResult.value.horoscope[targetDate];
+    onMounted(() => scrollTo(0, 0));
 
     return {
       targetDate,
