@@ -250,7 +250,13 @@ body {
 :root {
   --theme-color: #0f248a;
   --sub-color: #f3eb34;
+  --contents-width: 90%;
+
+  @media screen and (min-width: 1200px) {
+    & {
       --contents-width: 1170px;
+    }
+  }
 }
 
 .v-enter,
