@@ -53,9 +53,16 @@ export default defineComponent({
 }
 .signsList {
   display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  grid-template-columns: repeat(1, 1fr);
   list-style: none;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .signsList--Item {
