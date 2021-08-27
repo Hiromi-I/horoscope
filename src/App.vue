@@ -1,27 +1,22 @@
 <template>
-  <div>
-    <AppHeader @update="onDateUpdate" />
+  <AppHeader @update="onDateUpdate" />
 
-    <main>
-      <CenteringContainer>
-        <transition mode="out-in" appear>
-          <ResultContents
-            v-if="fortuneResult"
-            :fortune-result="fortuneResult"
-          />
-          <InitialGuide v-else />
-        </transition>
-      </CenteringContainer>
-    </main>
+  <main>
+    <CenteringContainer>
+      <transition mode="out-in" appear>
+        <ResultContents v-if="fortuneResult" :fortune-result="fortuneResult" />
+        <InitialGuide v-else />
+      </transition>
+    </CenteringContainer>
+  </main>
 
-    <AppFooter />
+  <AppFooter />
 
-    <ModalDialog
-      v-show="errorMessage"
-      :message="errorMessage"
-      @close="clearMessage"
-    />
-  </div>
+  <ModalDialog
+    v-show="errorMessage"
+    :message="errorMessage"
+    @close="clearMessage"
+  />
 </template>
 
 <script lang="ts">
@@ -255,7 +250,7 @@ body {
 :root {
   --theme-color: #0f248a;
   --sub-color: #f3eb34;
-  --contents-width: 1170px;
+      --contents-width: 1170px;
 }
 
 .v-enter,
