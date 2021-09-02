@@ -4,6 +4,8 @@ import InitialGuide from "@/components/InitialGuide.vue";
 import ResultContents from "@/components/ResultContents.vue";
 import ModalDialog from "@/components/ModalDialog.vue";
 
+window.scrollTo = jest.fn();
+
 describe("App", () => {
   it("占い結果が無い場合はDefaultContentsを描画", async () => {
     const wrapper = mount(App);

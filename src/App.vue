@@ -1,27 +1,22 @@
 <template>
-  <div>
-    <AppHeader @update="onDateUpdate" />
+  <AppHeader @update="onDateUpdate" />
 
-    <main>
-      <CenteringContainer>
-        <transition mode="out-in" appear>
-          <ResultContents
-            v-if="fortuneResult"
-            :fortune-result="fortuneResult"
-          />
-          <InitialGuide v-else />
-        </transition>
-      </CenteringContainer>
-    </main>
+  <main>
+    <CenteringContainer>
+      <transition mode="out-in" appear>
+        <ResultContents v-if="fortuneResult" :fortune-result="fortuneResult" />
+        <InitialGuide v-else />
+      </transition>
+    </CenteringContainer>
+  </main>
 
-    <AppFooter />
+  <AppFooter />
 
-    <ModalDialog
-      v-show="errorMessage"
-      :message="errorMessage"
-      @close="clearMessage"
-    />
-  </div>
+  <ModalDialog
+    v-show="errorMessage"
+    :message="errorMessage"
+    @close="clearMessage"
+  />
 </template>
 
 <script lang="ts">
@@ -246,16 +241,26 @@ select {
 body {
   background: url(assets/images/back.png) repeat;
   min-height: 100vh;
-  padding: 100px 0 70px;
+  padding: 150px 0 70px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   color: #333;
+
+  @media screen and (min-width: 768px) {
+    padding: 100px 0 70px;
+  }
 }
 :root {
   --theme-color: #0f248a;
   --sub-color: #f3eb34;
-  --contents-width: 1170px;
+  --contents-width: 90%;
+
+  @media screen and (min-width: 1200px) {
+    & {
+      --contents-width: 1170px;
+    }
+  }
 }
 
 .v-enter,

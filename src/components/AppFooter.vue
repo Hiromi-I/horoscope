@@ -39,14 +39,20 @@ export default {
 }
 .footerContainer {
   display: flex;
+  height: 100%;
 }
-.footerLink + .footerLink {
-  margin-left: 30px;
+.footerLink {
+  margin-top: auto;
+  margin-bottom: auto;
+
+  & + .footerLink {
+    margin-left: 30px;
+  }
 }
 .footerLinkText {
   display: inline-block;
   color: #337ab7;
-  line-height: 50px;
+  line-height: 1.2;
 
   &:hover {
     color: lighten(#337ab7, 30%);

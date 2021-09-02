@@ -1,6 +1,6 @@
 <template>
   <section class="defaultContents">
-    <p class="info">右上の日付を選択して下さい</p>
+    <p class="info">日付を選択して下さい</p>
     <img
       src="@/assets/images/signs.png"
       width="1200"
