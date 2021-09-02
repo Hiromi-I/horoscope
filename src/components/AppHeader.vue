@@ -38,26 +38,35 @@ export default {
 <style lang="scss" scoped>
 .header {
   background-color: var(--theme-color);
-  height: 86px;
   width: 100%;
   position: fixed;
   top: 0;
 }
 .headerContainer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 0;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 .logo {
   display: inline-block;
   height: 60px;
-  margin: 13px 0;
 }
 .dateContainer {
-  padding-bottom: 16px;
-  width: 180px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-end;
+
+  @media screen and (min-width: 768px) {
+    width: 180px;
+    flex-direction: column;
+  }
 }
 .dateDescription {
   color: white;
