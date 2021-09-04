@@ -1,12 +1,12 @@
-import { shallowMount } from "@vue/test-utils";
+import { render } from "@testing-library/vue";
 import ModalDialog from "@/components/ModalDialog.vue";
 
 describe("ModalDialog", () => {
   it("受け取ったメッセージを表示", () => {
-    const wrapper = shallowMount(ModalDialog, {
-      props: { message: 'test message' }
+    const { html } = render(ModalDialog, {
+      props: { message: "test message" },
     });
 
-    expect(wrapper.find('.message').text()).toBe('test message');
+    expect(html()).toMatch(/test message/);
   });
 });
