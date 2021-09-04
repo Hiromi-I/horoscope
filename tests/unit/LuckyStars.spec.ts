@@ -1,35 +1,32 @@
-import { shallowMount } from "@vue/test-utils";
+import { render } from "@testing-library/vue";
 import LuckyStars from "@/components/LuckyStars.vue";
 
 describe("LuckyStars", () => {
   it("scoreが3の場合", () => {
-    const wrapper = shallowMount(LuckyStars, {
-      props: { score: 3 }
-    });
+    const { getAllByText } = render(LuckyStars, { props: { score: 3 } });
 
-    expect(wrapper.text().match(/★/g)).toHaveLength(3);
-    expect(wrapper.text().match(/☆/g)).toHaveLength(2);
-    expect(wrapper.text().match(/[★☆]/g)).toHaveLength(5);
+    expect(getAllByText("★")).toHaveLength(3);
+    expect(getAllByText("☆")).toHaveLength(2);
+    expect(getAllByText(/[★☆]/)).toHaveLength(5);
   });
 
   it("scoreが5の場合", () => {
-    const wrapper = shallowMount(LuckyStars, {
-      props: { score: 5 }
+    const { getAllByText, queryByText } = render(LuckyStars, {
+      props: { score: 5 },
     });
 
-    expect(wrapper.text().match(/★/g)).toHaveLength(5);
-    expect(wrapper.text().match(/☆/g)).toBeNull;
-    expect(wrapper.text().match(/[★☆]/g)).toHaveLength(5);
+    expect(getAllByText("★")).toHaveLength(5);
+    expect(queryByText("☆")).toBeNull;
+    expect(getAllByText(/[★☆]/)).toHaveLength(5);
   });
 
   it("scoreが0の場合", () => {
-    const wrapper = shallowMount(LuckyStars, {
-      props: { score: 0 }
+    const { getAllByText, queryByText } = render(LuckyStars, {
+      props: { score: 0 },
     });
 
-    expect(wrapper.text().match(/★/g)).toBeNull;
-    expect(wrapper.text().match(/☆/g)).toHaveLength(5);
-    expect(wrapper.text().match(/[★☆]/g)).toHaveLength(5);
+    expect(queryByText("★")).toBeNull;
+    expect(getAllByText("☆")).toHaveLength(5);
+    expect(getAllByText(/[★☆]/)).toHaveLength(5);
   });
-
 });
