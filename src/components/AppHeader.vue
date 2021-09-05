@@ -16,6 +16,7 @@
           type="date"
           class="datePicker"
           pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+          data-testid="input-date"
           @change="$emit('update', $event.target.value)"
         />
       </div>
