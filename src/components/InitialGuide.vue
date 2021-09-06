@@ -5,6 +5,7 @@
       src="@/assets/images/signs.png"
       width="1200"
       height="400"
+      alt="星座一覧"
       class="signsImage"
     />
   </section>
