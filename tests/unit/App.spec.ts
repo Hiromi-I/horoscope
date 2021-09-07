@@ -1,51 +1,56 @@
-import { mount, flushPromises } from "@vue/test-utils";
+import { render, waitFor } from "@testing-library/vue";
 import App from "@/App.vue";
-import InitialGuide from "@/components/InitialGuide.vue";
-import ResultContents from "@/components/ResultContents.vue";
-import ModalDialog from "@/components/ModalDialog.vue";
+import { useGetFortune } from "@/hooks/useGetFortune";
 
 window.scrollTo = jest.fn();
+jest.mock("@/hooks/useGetFortune");
+const defaultMockData = {
+  fortuneResult: null,
+  errorMessage: "",
+  isLoading: false,
+  onDateUpdate: () => "",
+};
 
 describe("App", () => {
-  it("占い結果が無い場合はDefaultContentsを描画", async () => {
-    const wrapper = mount(App);
+  it("占い結果が無い場合はDefaultContentsを描画", () => {
+    (useGetFortune as jest.Mock).mockReturnValue(defaultMockData);
+    const { getByAltText, queryByRole } = render(App);
 
-    wrapper.vm.fortuneResult = null;
-    await flushPromises();
-
-    expect(wrapper.findComponent(InitialGuide).exists()).toBeTruthy();
-    expect(wrapper.findComponent(ResultContents).exists()).toBeFalsy();
+    expect(getByAltText("星座一覧")).not.toBeNull();
+    expect(queryByRole("heading")).toBeNull();
   });
 
   it("占い結果が有る場合はResultContentsを描画", async () => {
-    const wrapper = mount(App);
+    (useGetFortune as jest.Mock).mockReturnValue({
+      ...defaultMockData,
+      fortuneResult: { horoscope: { "2020/01/15": [] } },
+    });
+    const { queryByAltText, getByRole } = render(App);
 
-    wrapper.vm.fortuneResult = {
-      horoscope: {
-        "2020/01/15": [],
-      },
-    };
-    await flushPromises();
-
-    expect(wrapper.findComponent(ResultContents).exists()).toBeTruthy();
-    expect(wrapper.findComponent(InitialGuide).exists()).toBeFalsy();
+    await waitFor(() => {
+      expect(queryByAltText("星座一覧")).toBeNull();
+      expect(getByRole("heading")).not.toBeNull();
+    });
   });
 
   it("メッセージが有る場合はModalDialogを表示", async () => {
-    const wrapper = mount(App);
+    (useGetFortune as jest.Mock).mockReturnValue({
+      ...defaultMockData,
+      errorMessage: "test",
+    });
+    const { queryByRole } = render(App);
 
-    wrapper.vm.errorMessage = "test";
-    await flushPromises();
-
-    expect(wrapper.findComponent(ModalDialog).isVisible()).toBeTruthy();
+    await waitFor(() => {
+      expect(queryByRole("dialog")).not.toBeNull();
+    });
   });
 
   it("メッセージが無い場合はModalDialogを非表示", async () => {
-    const wrapper = mount(App);
+    (useGetFortune as jest.Mock).mockReturnValue(defaultMockData);
+    const { queryByRole } = render(App);
 
-    wrapper.vm.errorMessage = "";
-    await flushPromises();
-
-    expect(wrapper.findComponent(ModalDialog).isVisible()).toBeFalsy();
+    await waitFor(() => {
+      expect(queryByRole("dialog")).toBeNull();
+    });
   });
 });
