@@ -1,6 +1,6 @@
 <template>
   <div class="back">
-    <div class="dialog">
+    <div class="dialog" role="dialog">
       <p class="message">{{ message }}</p>
       <button class="closeButton" @click="$emit('close')">閉じる</button>
     </div>
