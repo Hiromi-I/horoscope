@@ -1,4 +1,5 @@
 import { render, waitFor } from "@testing-library/vue";
+import "@testing-library/jest-dom";
 import App from "@/App.vue";
 import { useGetFortune } from "@/hooks/useGetFortune";
 
@@ -16,8 +17,11 @@ describe("App", () => {
     (useGetFortune as jest.Mock).mockReturnValue(defaultMockData);
     const { getByAltText, queryByRole } = render(App);
 
-    expect(getByAltText("星座一覧")).not.toBeNull();
-    expect(queryByRole("heading")).toBeNull();
+    const defaultContentsImage = getByAltText("星座一覧");
+    const resultContentsTitle = queryByRole("heading");
+
+    expect(defaultContentsImage).toBeInTheDocument();
+    expect(resultContentsTitle).not.toBeInTheDocument();
   });
 
   it("占い結果が有る場合はResultContentsを描画", async () => {
@@ -28,8 +32,11 @@ describe("App", () => {
     const { queryByAltText, getByRole } = render(App);
 
     await waitFor(() => {
-      expect(queryByAltText("星座一覧")).toBeNull();
-      expect(getByRole("heading")).not.toBeNull();
+      const defaultContentsImage = queryByAltText("星座一覧");
+      const resultContentsTitle = getByRole("heading");
+
+      expect(defaultContentsImage).not.toBeInTheDocument();
+      expect(resultContentsTitle).toBeInTheDocument();
     });
   });
 
@@ -41,16 +48,17 @@ describe("App", () => {
     const { queryByRole } = render(App);
 
     await waitFor(() => {
-      expect(queryByRole("dialog")).not.toBeNull();
+      const dialog = queryByRole("dialog");
+      expect(dialog).toBeInTheDocument();
     });
   });
 
-  it("メッセージが無い場合はModalDialogを非表示", async () => {
+  it("メッセージが無い場合はModalDialogを非表示", () => {
     (useGetFortune as jest.Mock).mockReturnValue(defaultMockData);
     const { queryByRole } = render(App);
 
-    await waitFor(() => {
-      expect(queryByRole("dialog")).toBeNull();
-    });
+    const dialog = queryByRole("dialog");
+
+    expect(dialog).not.toBeInTheDocument();
   });
 });
