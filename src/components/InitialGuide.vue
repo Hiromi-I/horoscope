@@ -1,13 +1,21 @@
 <template>
   <section class="defaultContents">
     <p class="info">日付を選択して下さい</p>
-    <img
-      src="@/assets/images/signs.png"
-      width="1200"
-      height="400"
-      alt="星座一覧"
-      class="signsImage"
-    />
+    <picture>
+      <source
+        srcset="@/assets/images/signs-lg.png"
+        media="(min-width: 1200px)"
+      />
+      <source
+        srcset="@/assets/images/signs-md.png"
+        media="(min-width: 768px)"
+      />
+      <img
+        src="@/assets/images/signs-sm.png"
+        alt="星座一覧"
+        class="signsImage"
+      />
+    </picture>
   </section>
 </template>
 
@@ -43,7 +51,7 @@ export default defineComponent({
   margin-bottom: 30px;
 }
 .signsImage {
-  max-width: 100%;
+  width: 100%;
   height: auto;
 }
 </style>
