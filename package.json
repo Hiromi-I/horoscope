@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit --verbose",
+    "test:unit": "vue-cli-service test:unit --verbose --ci --runInBand",
     "lint": "vue-cli-service lint",
     "mock-api": "json-server --watch mock_db.json --routes mock_route.json"
   },

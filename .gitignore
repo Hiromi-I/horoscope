@@ -24,3 +24,4 @@ pnpm-debug.log*
 
 # Jest output
 coverage
+reports
