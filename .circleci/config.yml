@@ -45,6 +45,13 @@ jobs:
       - run: 
           name: Execute test
           command: npm run test:unit
+      - store_test_results:
+          path: reports
+      - store_artifacts:
+          path: reports
+      - store_artifacts:
+          path: coverage
+
   build-and-deploy:
     executor: js-env
     working_directory: ~/app
